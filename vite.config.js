@@ -7,7 +7,7 @@ export default defineConfig({
     host: '0.0.0.0',
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.mjs', '.js', '.jsx', '.json', '.ts', '.tsx']
   },
   esbuild: {
     loader: 'jsx',
