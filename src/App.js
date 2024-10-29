@@ -7,95 +7,88 @@ const AppContainer = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: 20px;
-  font-family: 'Arial', sans-serif;
 `;
 
-const Header = styled.header`
+const AppHeader = styled.div`
   text-align: center;
   margin-bottom: 40px;
-`;
-
-const Title = styled.h1`
-  color: #2c3e50;
-  font-size: 2.5em;
-  margin-bottom: 10px;
-
-  span {
-    color: ${props => props.color || '#2c3e50'}; /* Dynamic color */
+  
+  @media (max-width: 768px) {
+    margin-bottom: 20px;
   }
 `;
 
-const Subtitle = styled.h2`
+const MainTitle = styled.h1`
+  color: #2c3e50;
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  
+  @media (max-width: 768px) {
+    font-size: 2rem;
+  }
+`;
+
+const SubTitle = styled.h2`
   color: #7f8c8d;
-  font-size: 1.5em;
-  margin: 0;
+  font-size: 1.5rem;
+  font-weight: normal;
+  
+  @media (max-width: 768px) {
+    font-size: 1.2rem;
+  }
 `;
 
-const ContentContainer = styled.div`
+const ContentWrapper = styled.div`
   display: flex;
-  gap: 40px;
+  gap: 30px;
   align-items: flex-start;
+  justify-content: center;
+  
+  @media (max-width: 1200px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
-const WheelSection = styled.div`
-  flex: 1;
-  min-width: 600px;
+const WheelWrapper = styled.div`
+  flex-shrink: 0;
+  width: 600px;
+  
+  @media (max-width: 768px) {
+    width: 100%;
+    max-width: 500px;
+    min-width: 320px;
+  }
 `;
 
-const DetailSection = styled.div`
+const PanelWrapper = styled.div`
   flex: 1;
-  position: sticky;
-  top: 20px;
-  padding: 20px;
-  background-color: #f8f9fa;
-  border-radius: 10px;
-  min-height: 400px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  min-width: 300px;
+  max-width: 600px;
+  
+  @media (max-width: 1200px) {
+    width: 100%;
+    max-width: 600px;
+  }
 `;
 
 function App() {
   const [selectedComponent, setSelectedComponent] = useState(null);
 
-  const getColorForComponent = (component) => {
-    switch (component?.id) {
-      case 'teams':
-      case 'resources':
-      case 'execution':
-      case 'actions':
-      case 'compliance':
-        return '#50817C';
-      default:
-        return '#2c3e50';
-    }
-  };
-
-  const getColoredTitle = () => {
-    const color = getColorForComponent(selectedComponent);
-    return (
-      <>
-        <span style={{ color: selectedComponent?.id === 'teams' ? color : '#2c3e50' }}>T</span>.
-        <span style={{ color: selectedComponent?.id === 'resources' ? color : '#2c3e50' }}>R</span>.
-        <span style={{ color: selectedComponent?.id === 'actions' ? color : '#2c3e50' }}>A</span>.
-        <span style={{ color: selectedComponent?.id === 'compliance' ? color : '#2c3e50' }}>C</span>.
-        <span style={{ color: selectedComponent?.id === 'execution' ? color : '#2c3e50' }}>E</span>
-      </>
-    );
-  };
-
   return (
     <AppContainer>
-      <Header>
-        <Title>{getColoredTitle()}</Title>
-        <Subtitle>The Intelligence Framework</Subtitle>
-      </Header>
-      <ContentContainer>
-        <WheelSection>
+      <AppHeader>
+        <MainTitle>T.R.A.C.E</MainTitle>
+        <SubTitle>The Intelligence Framework</SubTitle>
+      </AppHeader>
+      <ContentWrapper>
+        <WheelWrapper>
           <FrameworkWheel onComponentSelect={setSelectedComponent} />
-        </WheelSection>
-        <DetailSection>
+        </WheelWrapper>
+        <PanelWrapper>
           <DetailPanel selectedComponent={selectedComponent} />
-        </DetailSection>
-      </ContentContainer>
+        </PanelWrapper>
+      </ContentWrapper>
     </AppContainer>
   );
 }

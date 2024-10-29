@@ -10,12 +10,22 @@ const PanelContainer = styled.div`
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  
+  @media (max-width: 1200px) {
+    height: auto;
+    min-height: 400px;
+    margin-top: 20px;
+  }
 `;
 
 const Content = styled.div`
   text-align: left;
   max-width: 80%;
   line-height: 1.6;
+  
+  @media (max-width: 768px) {
+    max-width: 95%;
+  }
 `;
 
 const Title = styled.h2`
